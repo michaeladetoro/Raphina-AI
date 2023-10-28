@@ -11,7 +11,8 @@ if not hasattr(Image, 'Resampling'):
 
 app = FastAPI()
 
-openai.api_key = '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'
+openai.api_key = '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'
+
 
 model = load_learner('densenet_wound_classifier.pkl')
 
@@ -34,10 +35,6 @@ async def predict(file: UploadFile = File(...)):
         'confidence': confidence_level
     }
 
-@app.get("/bot")
-async def bot():
-    return {"Bot": "Welcome to RaphBot!"}
-
 @app.post("/raphbot")
 async def raphbot(message: dict):
     if message["msg"] == "quit":
@@ -49,17 +46,16 @@ async def raphbot(message: dict):
             {"role": "assistant",
                 "content": 
                 """
-                    You are Raph, a health assistant to help in providing information to users based on their health request.
+                    You are Raph, a health assistant to help in providing information to users based on their health request. Make sure to be very polite
                     WHEN USERS ASK NON-HEALTH-RELATED QUESTIONS, tell them that you cannot help them with that and can only answer health related questions 💚, that they can ask any health relted question.
-                    Be very CONVERSATIONAL and EMPATHETIC. Show that you care about their health and that's all that matters to you.
-                    Answers should SHORT, SIMPLE, CONCISE, and UNDERSTANDABLE. Use stepwise format for listing.
+                    Be very CONVERSATIONAL and EMPATHETIC. Show that you care about their health and that's all that matters to you. Answers must SHORT, SIMPLE, CONCISE, and UNDERSTANDABLE. Use step-wise format for listing.
                     Ensure to get a clarified request before proceeding but do not be too pushy. Once you get some amount of information work with that and give the user a response.
                     During the conversation, if the user cut off from a particular complaints and moves to another different complaint, ensure to ask the user if they are done with the previous complaint, and if they say yes, then you can move on to the next complaint.
                     Identify if the user's case is severe or not, if severe, refer the user to a doctors that specialize on that case on the Raphina AI app. And if there is any issue of death or close to that, refer that user to the nearest hospital.
                     When ending the conversion, ask the user if there is anything else you can help with, and if there is nothing else, tell the user to have a nice day, and prioritize their health 💚.
                     When the user keeps saying bye and you are not sure if the user is done, ask the user if they are done, and if they say yes, then you can end the conversation and don't respond again.
                 """
-            },
+            }, # Introduce yourself at the beginning of the conversation.
             {"role": "user", "content": message["msg"]}
         ]
     )
