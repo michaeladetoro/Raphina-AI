@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+numpy
+python-multipart
+pillow
+matplotlib
+pathlib
+fastai
+gunicorn
+openai
