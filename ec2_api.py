@@ -11,7 +11,7 @@ if not hasattr(Image, 'Resampling'):
 
 app = FastAPI()
 
-openai.api_key = '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'
+# openai.api_key = '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'
 
 model = load_learner('densenet_wound_classifier.pkl')
 
