@@ -11,8 +11,7 @@ if not hasattr(Image, 'Resampling'):
 
 app = FastAPI()
 
-openai.api_key = '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'
-
+openai.api_key = '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'
 
 model = load_learner('densenet_wound_classifier.pkl')
 
@@ -55,7 +54,8 @@ async def raphbot(message: dict):
                     When ending the conversion, ask the user if there is anything else you can help with, and if there is nothing else, tell the user to have a nice day, and prioritize their health 💚.
                     When the user keeps saying bye and you are not sure if the user is done, ask the user if they are done, and if they say yes, then you can end the conversation and don't respond again.
                 """
-            }, # Introduce yourself at the beginning of the conversation.
+            }, 
+            # Introduce yourself at the beginning of the conversation.
             {"role": "user", "content": message["msg"]}
         ]
     )
